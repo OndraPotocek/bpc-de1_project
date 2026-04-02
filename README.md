@@ -4,7 +4,7 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 ## Features
 - PWM generatrion - setting period and duty cycle with buttnost and switches on FPGA board NEXYS A7 50T.
 - view output signal on an LED (oscilloscope) and/or headphone jack
-
+- view period/immediate change of amplitude on a 7 segment diplay (soon to be added into the schematic)
 
 
 ## sources:
