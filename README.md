@@ -1,5 +1,9 @@
-# Soundmeter
-Soundmeeter is project for BPC_DE1 subject at Brno University of Technology - faculty of electrical engeneering and comunicaton.
+# Waveform Generator
+Waveform Generator is project for BPC_DE1 subject at Brno University of Technology - faculty of electrical engeneering and comunication.
+
+## Features
+- PWM generatrion - setting period and duty cycle with buttnost and switches on FPGA board NEXYS A7 50T.
+- view output signal on an LED (oscilloscope) and/or headphone jack
 
 
 
@@ -20,3 +24,6 @@ Soundmeeter is project for BPC_DE1 subject at Brno University of Technology - fa
 - BTNL = sine wave
 - BTNR = square wave
 - BTNU = sawtooth
+
+- switches = to change period, 0-15, SW0-SW4
+    - SW5 nad SW6 to change duty cycle
