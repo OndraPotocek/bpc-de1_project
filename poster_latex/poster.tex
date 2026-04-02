@@ -1,19 +1,16 @@
+\documentclass[final]{beamer}
 \usepackage[T1]{fontenc}
+ \usepackage[utf8]{luainputenc}
 \usepackage{lmodern}
-\usepackage[size=custom,width=120,height=72,scale=1.0]{beamerposter}
+\usepackage[size=custom, width=122,height=91, scale=1.2]{beamerposter}
+\usetheme{gemini}
+\usecolortheme{gemini}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.14}
 \usepackage{anyfontsize}
-
-% ====================
-% Lengths
-% ====================
-
-% If you have N columns, choose \sepwidth and \colwidth such that
-% (N+1)*\sepwidth + N*\colwidth = \paperwidth
 \newlength{\sepwidth}
 \newlength{\colwidth}
 \setlength{\sepwidth}{0.025\paperwidth}
@@ -25,31 +22,31 @@
 % Title
 % ====================
 
-\title{Some fancy title: followed by some more text}
+\title{Waveform Generator}
 
-\author{John Doe \inst{1} \and Lisa Darwin \inst{2} \and Albert Oppenheimer \inst{2}}
+\author{Ondřej Potoček, Anna Hrušková, Jan Pánik}
 
-\institute[shortinst]{\inst{1} Some Institute \samelineand \inst{2} Another Institute}
+\institute[shortinst]{Brno University of Technology}
 
 % ====================
 % Footer (optional)
 % ====================
 
 \footercontent{
-  \href{https://www.example.com}{https://www.example.com} \hfill
-  ABC Conference 2025, London --- XYZ-1234 \hfill
-  \href{mailto:john.doe@example.com}{john.doe@example.com}}
+  \href{https://github.com}{Github: https://github.com} \hfill
+Poster Session \hfill
+  \href{mailto:youremail@ualberta.ca}{youremail@uleth.ca}}
 % (can be left out to remove footer)
 
 % ====================
 % Logo (optional)
 % ====================
-% Refer to https://github.com/k4rtik/uchicago-poster
-% logo: https://communications.admin.ox.ac.uk/communications-resources/visual-identity/identity-guidelines/the-oxford-logo
-% use this to include logos on the left and/or right side of the header:
-\logoright{\includegraphics[height=7cm]{logos/ox-logo.png}}
-% \logoleft{\includegraphics[height=7cm]{logos/ox-logo.png}}
 
+% use this to include logos on the left and/or right side of the header:
+% Left: institution
+% \logoright{\includegraphics[height=8cm]{logos/UofL_Landscape_RGB_FullColourRev.png}}
+% Right: funding agencies and other affilations 
+%\logoright{\includegraphics[height=7cm]{logos/NSF.eps}}
 % ====================
 % Body
 % ====================
@@ -70,12 +67,7 @@
 
     \begin{figure}
       \centering
-      \begin{tikzpicture}[scale=6]
-        \draw[step=0.25cm,color=gray] (-1,-1) grid (1,1);
-        \draw (1,0) -- (0.2,0.2) -- (0,1) -- (-0.2,0.2) -- (-1,0)
-          -- (-0.2,-0.2) -- (0,-1) -- (0.2,-0.2) -- cycle;
-      \end{tikzpicture}
-      \caption{A figure caption.}
+                    \includegraphics[width=0.6\textwidth]{figures/results_fig.pdf}
     \end{figure}
 
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies
@@ -165,19 +157,8 @@
 
     \begin{figure}
       \centering
-      \begin{tikzpicture}
-        \begin{axis}[
-            scale only axis,
-            no markers,
-            domain=0:2*pi,
-            samples=100,
-            axis lines=center,
-            axis line style={-},
-            ticks=none]
-          \addplot[red] {sin(deg(x))};
-          \addplot[blue] {cos(deg(x))};
-        \end{axis}
-      \end{tikzpicture}
+        \includegraphics[width=0.3\textwidth]{figures/dag.png}
+
       \caption{Another figure caption.}
     \end{figure}
 
@@ -281,11 +262,7 @@
     commodo quam, non luctus nibh ullamcorper in. Class aptent taciti sociosqu
     ad litora torquent per conubia nostra, per inceptos himenaeos.
 
-    Nulla varius finibus volutpat. Mauris molestie lorem tincidunt, iaculis
-    libero at, gravida ante. Phasellus at felis eu neque suscipit suscipit.
-    Integer ullamcorper, dui nec pretium ornare, urna dolor consequat libero,
-    in feugiat elit lorem euismod lacus. Pellentesque sit amet dolor mollis,
-    auctor urna non, tempus sem.
+
 
   \end{block}
 

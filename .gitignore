@@ -4,3 +4,7 @@
 *.log
 *.synctex.gz
 *.fdb_latexmk
+*.toc
+*.snm
+*.out
+*.nav
