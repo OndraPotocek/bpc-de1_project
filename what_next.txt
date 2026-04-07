@@ -1,3 +1,8 @@
+for debounce = counter, clk_en needed
+    display_driver = counter, clk_en, segment
+    segment
+
+
 wav_gen_top
     entity wav_form_top is
         Port (
