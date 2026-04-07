@@ -1,0 +1,33 @@
+wav_gen_top
+    entity wav_form_top is
+        Port (
+            clc     : in STD_LOGIC;
+            btnc
+            btnu
+            btnl
+            btnr
+
+            sw
+            led
+
+            seg
+            dp
+            an     
+
+            -- audio
+            AUD_PWM         : out STD_LOGIC;
+            AUD_SD          : out STD_LOGIC;
+            oscilloscope    : out STD_LOGIC
+
+        );
+end waveform_generator_top;
+
+architecture Structural of wav_form_top is
+
+begin
+
+    -- audio enable high, amp stays on
+    AUD_SD <= '1';
+
+
+end Structural;
