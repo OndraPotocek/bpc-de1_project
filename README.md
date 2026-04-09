@@ -25,5 +25,5 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 - BTNR = square wave
 - BTNU = sawtooth
 
-- switches = to change period, 0-15, SW0-SW4
+- switches = to change period, 0-15, SW0-SW3
     - SW5 nad SW6 to change duty cycle
