@@ -87,7 +87,29 @@
 
   \end{block}
 
-  \begin{alertblock}{A highlighted block}
+  \begin{alertblock}{Schematic}
+    pwm\_top
+    \begin{itemize}
+    \item \textbf{Inputs} - clk, reset (located on the btnc button), switches (from 0 to 3) to change the period, and then 5 and 6 to change the duty cycle of a square wave. All used buttons are debounced.
+    
+    Case needed for switch mapping the duty cycles. If the counter's current vaule is less than the treshold we set, it outputs a '1', else '0'.
+
+    \item \textbf{Outputs} 
+    \end{itemize}
+    
+    latch - acts as a memory
+    \begin{itemize}
+    \item \textbf{Inputs}
+    \item \textbf{Outputs} 
+    \end{itemize}
+    
+
+      saw tooth wave = since counter already counts from 0 to 255 and then drops back to 0 again, it is literally a sawtooth wave.
+
+
+      sq\_gen takes in 2 switches directly - CASE statement needed to translate switches into binary - MUX expects 8-bit binary, we have only 2 
+    
+      display multiplex has \"00\" & sw so it has 4 bits on the input - glues them together
 
   \end{alertblock}
 
@@ -103,7 +125,6 @@
 \begin{column}{\colwidth}
 
   \begin{block}{A block containing an enumerated list}
-  :)
   \end{block}
 
   \begin{block}{Fusce aliquam magna velit}
