@@ -122,7 +122,7 @@ architecture Behavioral of pwm_top is
     end component bin2seg
 
     component disp_mux
-        Port(sig_digit : in STD_LOGIC;
+        Port(sig_dig : in STD_LOGIC;
             sw0 : in STD_LOGIC;
             sw1 : in STD_LOGIC;
             sig_bin : in STD_LOGIC_VECTOR(3 downto 0);
