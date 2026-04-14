@@ -17,6 +17,10 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 ### output
     - LED indication of sine, sawtooth and square waveforms
 
+    - 7 segment display 2x
+        - one to display frequency - 0-f
+        - second one to display duty cycle
+
 
 
 ### buttons
@@ -27,3 +31,7 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 
 - switches = to change period, 0-15, SW0-SW4
     - SW5 nad SW6 to change duty cycle
+
+
+s_max = clock frequency / (256 * wanted frequency)
+      = 100_000_000 / (256 * 200) ... 400 ...
