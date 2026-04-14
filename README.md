@@ -15,9 +15,24 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
     - https://vhdlwhiz.com/pwm-controller/
 
 
+    - 7 segment display 2x
+        - one to display frequency - 0-f
+        - second one to display duty cycle
+
+
+
+### buttons
+- BTNC = reset
+- BTNL = sine wave
+- BTNR = square wave
 - BTNU = sawtooth
 
-- switches = to change period, 0-15, SW0-SW3
+- switches = to change period, 0-15, SW0-SW4
     - SW5 nad SW6 to change duty cycle
 
-<img width="1650" height="912" alt="schematic" src="https://github.com/user-attachments/assets/5f147911-500f-4d23-990f-1759783ef1c7" />
+
+s_max = clock frequency / (256 * wanted frequency)
+      = 100_000_000 / (256 * 200) ... 400 ...
+
+      
+<img width="1650" height="912" alt="schematic" src="https://github.com/user-attachments/assets/05147662-00a8-4680-a6be-e7e076b7c337" />
