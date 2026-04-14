@@ -103,7 +103,7 @@ begin
 
                 end if;
 
-                -- 3. Zpoždění pro detekci hrany (pulzu)
+                -- 3. Zpoždění pro detekci hrany (pulzu) gg
                 delayed_u <= debounced_u;
                 delayed_r <= debounced_r;
                 delayed_l <= debounced_l;
