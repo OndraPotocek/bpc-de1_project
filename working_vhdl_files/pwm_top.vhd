@@ -1,5 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+
 entity pwm_top is
     Port(clk : in STD_LOGIC; 
         rst_btnc : in STD_LOGIC;
@@ -22,13 +23,15 @@ architecture Behavioral of pwm_top is
     signal sig_saw : STD_LOGIC_VECTOR(7 downto 0);
     signal sig_sine : STD_LOGIC_VECTOR(7 downto 0);
     signal sig_sq : STD_LOGIC_VECTOR(7 downto 0);
-
+    signal clk_en_wave : STD_LOGIC;
     signal clk_en : STD_LOGIC;
     signal sig_btnu : STD_LOGIC;
     signal sig_btnl : STD_LOGIC;
     signal sig_btnr : STD_LOGIC;
     signal sig_endisp : STD_LOGIC;
     signal sig_bin : STD_LOGIC_VECTOR(3 downto 0);
+    signal sig_dig : STD_LOGIC;
+
 
 
     component pwm
