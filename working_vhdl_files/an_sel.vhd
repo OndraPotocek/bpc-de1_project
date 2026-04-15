@@ -9,4 +9,11 @@ end an_sel;
 
 architecture Behavioral of an_sel is
 
+    begin
+        if sig_digit = '0' then
+            an <= "11111110";
+        else
+            an <= "11101111";
+        end if;
+        
 end Behavioral;
