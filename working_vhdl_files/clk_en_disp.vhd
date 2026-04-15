@@ -12,7 +12,21 @@ entity clk_en_disp is
 end clk_en_disp;
 
 architecture Behavioral of clk_en_disp is
-    signal cnt : integer range 0 to G_MAX := 0;
 begin
-   
+    process(clk, rst)
+        variable count : integer := 0;
+    begin
+        if rst = '1' then
+            ce_disp <= '0';
+            count := 0;
+        elsif rising_edge(clk) then
+            if count = G_MAX - 1 then
+                ce_disp <= '1';
+                count := 0;
+            else
+                ce_disp <= '0';
+                count := count + 1;
+            end if;
+        end if;
+    end process;
 end
