@@ -1,6 +1,15 @@
+------------------------------------------------
+--! @file clk_en_disp.vhd
+--! @brief This code generates a clock enable signal for the display based on a specified maximum count value.
+------------------------------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
+--! clk - Input clock signal
+--! rst - Signal to reset the component
+--! ce_disp - Clock enable signal for the display
+--! G_MAX - Max count value before asserting the clock enable signal
 entity clk_en_disp is
     generic (
         G_MAX : positive := 100_000
@@ -11,6 +20,7 @@ entity clk_en_disp is
     );
 end clk_en_disp;
 
+--
 architecture Behavioral of clk_en_disp is
 begin
     process(clk, rst)

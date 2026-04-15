@@ -1,6 +1,15 @@
+------------------------------------------------
+--! @file counter_1bit.vhd
+--! @brief Toggles output between '0' and '1' on each rising edge of the clock when enabled
+------------------------------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
+--! clk - Input clock signal
+--! rst - Signal to reset the component
+--! en - Enable signal to allow counting
+--! sig_digit - Output signal that toggles between '0' and '1'
 entity counter_1bit is
 Port(clk : in STD_LOGIC;
         rst : in STD_LOGIC;

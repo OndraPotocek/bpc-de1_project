@@ -1,6 +1,15 @@
+-------------------------------------------------
+--! @file disp_mux.vhd
+--! @brief Multiplexer switching between displaying frequency and duty cycle
+-------------------------------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
+--! sig_dig - Signal to select which input to display (0 for sw0, 1 for sw1)
+--! sw0 - 4-bit input representing frequency
+--! sw1 - 2-bit input representing duty cycle
+--! bin - 4-bit output that goes to the bin2seg decoder
 entity disp_mux is
     Port(sig_dig : in STD_LOGIC;
         sw0 : in STD_LOGIC_vector(3 downto 0);

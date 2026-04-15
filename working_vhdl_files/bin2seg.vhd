@@ -1,13 +1,19 @@
-
+-----------------------------------------------
+--! @file bin2seg.vhd
+--! @brief This code takes a 4-bit binary input and outputs the corresponding 7-segment display pattern.
+------------------------------------------------
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
+--! bin - 4-bit binary input representing a hexadecimal digit (0-F)
+--! seg - 7-bit output for the 7-segment display (a-g)
 entity bin2seg is
     Port ( bin : in STD_LOGIC_VECTOR (3 downto 0);
            seg : out STD_LOGIC_VECTOR (6 downto 0));
 end bin2seg;
 
+--! @brief The architecture defines a process that decodes the 4-bit binary input into the corresponding 7-segment display pattern.
 architecture Behavioral of bin2seg is
 
 begin
