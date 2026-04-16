@@ -1,33 +1,46 @@
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity debounce is
     Port ( clk           : in STD_LOGIC;
            rst           : in STD_LOGIC;
-           btn_in        : in STD_LOGIC;
-           btn_state     : out STD_LOGIC;
-           btn_press     : out STD_LOGIC);
+           btnu          : in STD_LOGIC;
+           btnr          : in STD_LOGIC;
+           btnl          : in STD_LOGIC;
+           btn_up_db     : out STD_LOGIC;
+           btn_left_db   : out STD_LOGIC;
+           btn_right_db  : out STD_LOGIC
+           );
 end debounce;
 
 architecture Behavioral of debounce is
     ----------------------------------------------------------------
     -- Constants
     ----------------------------------------------------------------
-    constant C_SHIFT_LEN : positive := 4;  -- kolik jedniček nebo nul musi byt za sebou -- 4 stačí, většina tlačítek se tak ošetří
-    constant C_MAX       : positive := 200_000;  -- Sampling period, jka často se ty 4 samply budou brát, jak rychle se bude samplovat
-                                           -- 2 for simulation
-                                           -- 200_000 (2 ms) for implementation !!! 8 ms stabilní signál = sepnuto rozepnuto
+    constant C_SHIFT_LEN : positive := 4;  -- how many ones has to be there idk
+    constant C_MAX       : positive := 200_000;  -- Sampling period
 
     ----------------------------------------------------------------
     -- Internal signals
     ----------------------------------------------------------------
-    signal ce_sample : std_logic;
-    signal sync0     : std_logic;
-    signal sync1     : std_logic;
-    signal shift_reg : std_logic_vector(C_SHIFT_LEN-1 downto 0);
-    signal debounced : std_logic;
-    signal delayed   : std_logic;
+    signal ce_sample : std_logic; -- 
+
+    -- Signály pro tlačítko UP (nahoru)
+    signal sync0_u, sync1_u         : std_logic; -- human presses button asynchronously, so we send the signal to sync0 first, then sync1 to make it OK
+    signal shift_reg_u              : std_logic_vector(C_SHIFT_LEN-1 downto 0); -- more 1 after one another --> its pressed
+    signal debounced_u  : std_logic; -- if '1111' --> outputs 1, if '0000' --> 0, is it pressed now
+    signal delayed_u   : std_logic; -- last state, was it pressed before
+
+    -- Signály pro tlačítko RIGHT (doprava)
+    signal sync0_r, sync1_r         : std_logic;
+    signal shift_reg_r              : std_logic_vector(C_SHIFT_LEN-1 downto 0);
+    signal debounced_r              : std_logic;
+    signal delayed_r   : std_logic;
+
+    -- Signály pro tlačítko LEFT (doleva)
+    signal sync0_l, sync1_l         : std_logic;
+    signal shift_reg_l              : std_logic_vector(C_SHIFT_LEN-1 downto 0);
+    signal debounced_l, delayed_l   : std_logic;
 
     ----------------------------------------------------------------
     -- Component declaration for clock enable
@@ -54,44 +67,47 @@ begin
         );
 
     ----------------------------------------------------------------
-    -- Synchronizer + debounce
+    -- Synchronizer + debounce logic
     ----------------------------------------------------------------
-    p_debounce : process(clk) -- vykonávají se sekvenčně
-        -- ALE PŘIŘAZENÍ se naplní až po tom co je proces ukončen
+    p_debounce : process(clk) 
     begin
-        -- asynchronní reset TADY, ale toto je synchronní rst
-        if rising_edge(clk) then -- řízeno náběžnou hranou
+        if rising_edge(clk) then 
             if rst = '1' then
-                sync0     <= '0';
-                sync1     <= '0';
-                shift_reg <= (others => '0');
-                debounced <= '0';
-                delayed   <= '0';
-
+                -- Vynulování všech signálů pro všechna tlačítka
+                sync0_u <= '0'; sync1_u <= '0'; shift_reg_u <= (others => '0'); debounced_u <= '0'; delayed_u <= '0';
+                sync0_r <= '0'; sync1_r <= '0'; shift_reg_r <= (others => '0'); debounced_r <= '0'; delayed_r <= '0';
+                sync0_l <= '0'; sync1_l <= '0'; shift_reg_l <= (others => '0'); debounced_l <= '0'; delayed_l <= '0';
             else
-                -- Input synchronizer
-                sync1 <= sync0; -- syn0 se aktualizuje až na konci procesu, až na dlaší hraně náběžného signálu
-                sync0 <= btn_in;
+                -- 1. Input synchronizer (proti metastabilitě)
+                sync1_u <= sync0_u; sync0_u <= btnu;
+                sync1_r <= sync0_r; sync0_r <= btnr;
+                sync1_l <= sync0_l; sync0_l <= btnl;
 
-                -- Sample only when enable pulse occurs
-                if ce_sample = '1' then -- pomocná proměnná
+                -- 2. Samplování ve správný okamžik
+                if ce_sample = '1' then 
+                    
+                    -- Tlačítko UP
+                    shift_reg_u <= shift_reg_u(C_SHIFT_LEN-2 downto 0) & sync1_u;
+                    if shift_reg_u = (shift_reg_u'range => '1') then debounced_u <= '1';
+                    elsif shift_reg_u = (shift_reg_u'range => '0') then debounced_u <= '0'; end if;
 
-                    -- Shift values to the left and load a new sample as LSB
-                    shift_reg <= shift_reg(C_SHIFT_LEN-2 downto 0) & sync1; -- & SPOJENÍ 2 PROMĚNNÝCH DO SEBE
-                        -- zřetězování věktorů, bitů
+                    -- Tlačítko RIGHT
+                    shift_reg_r <= shift_reg_r(C_SHIFT_LEN-2 downto 0) & sync1_r;
+                    if shift_reg_r = (shift_reg_r'range => '1') then debounced_r <= '1';
+                    elsif shift_reg_r = (shift_reg_r'range => '0') then debounced_r <= '0'; end if;
 
-                    -- Check if all bits are '1'
-                    if shift_reg = (shift_reg'range => '1') then -- range ... vezme všechny bity v registru, nezávisle na jeho šířce
-                        debounced <= '1';
-                    -- Check if all bits are '0'
-                    elsif shift_reg = (shift_reg'range => '0') then
-                        debounced <= '0';
-                    end if;
+                    -- Tlačítko LEFT
+                    shift_reg_l <= shift_reg_l(C_SHIFT_LEN-2 downto 0) & sync1_l;
+                    if shift_reg_l = (shift_reg_l'range => '1') then debounced_l <= '1';
+                    elsif shift_reg_l = (shift_reg_l'range => '0') then debounced_l <= '0'; end if;
 
                 end if;
 
-                -- One clock delayed output
-                delayed <= debounced; -- pomocný signál, 
+                -- 3. Zpoždění pro detekci hrany (pulzu) gg
+                delayed_u <= debounced_u;
+                delayed_r <= debounced_r;
+                delayed_l <= debounced_l;
+                
             end if;
         end if;
     end process;
@@ -99,9 +115,8 @@ begin
     ----------------------------------------------------------------
     -- Outputs
     ----------------------------------------------------------------
-    btn_state <= debounced;
-    -- One-clock pulse when button pressed
-    btn_press <= debounced and not(delayed); -- AND ... druhý signál je znegovaný,
-        -- NOT delayed and debounced
+    btn_up_db    <= debounced_u and not(delayed_u);
+    btn_right_db <= debounced_r and not(delayed_r);
+    btn_left_db  <= debounced_l and not(delayed_l);
 
 end Behavioral;
