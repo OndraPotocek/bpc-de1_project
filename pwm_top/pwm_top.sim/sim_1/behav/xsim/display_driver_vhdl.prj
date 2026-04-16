@@ -1,0 +1,26 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/pwm_tb.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/pwm_top.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/clk_en_disp.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/disp_mux.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/an_sel.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/an_sel_tb.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/clk_en_disp_tb.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/clk_en_wave.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/counter_1bit.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/counter_1bit_tb.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/debounce.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/disp_mux_tb.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/pwm.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/pwm_mux.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/sine_gen.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/sq_gen.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/bin2seg.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/clk_en.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/counter.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/latch.vhd" \
+"../../../../pwm_top.srcs/sources_1/imports/working_vhdl_files/latch_tb.vhd" \
+
+# Do not sort compile order
+nosort
