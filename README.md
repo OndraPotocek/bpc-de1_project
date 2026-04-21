@@ -8,14 +8,17 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 
 
 ## sources:
-    - PWM modulation nexys manual: https://digilent.com/reference/_media/reference/programmable-logic/nexys-a7/nexys-a7_rm.pdf
+[PWM modulation nexys manual]([URL adresa](https://digilent.com/reference/_media/reference/programmable-logic/nexys-a7/nexys-a7_rm.pdf))
 
     - https://media.neliti.com/media/publications/263541-fpga-based-high-frequency-pwm-waveform-g-1be58e06.pdf
 
     - https://vhdlwhiz.com/pwm-controller/
 
-### output
-    - LED indication of sine, sawtooth and square waveforms
+
+
+7 segment display 2x
+    - one to display frequency - 0-f
+    - second one to display duty cycle
 
 
 
@@ -27,3 +30,11 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 
 - switches = to change period, 0-15, SW0-SW4
     - SW5 nad SW6 to change duty cycle
+
+
+s_max = clock frequency / (256 * wanted frequency)
+      = 100_000_000 / (256 * 200) ... 400 ...
+
+
+<img width="1660" height="929" alt="schematic" src="https://github.com/user-attachments/assets/260d7e00-7461-4fa2-b487-0d13d8e1e6ff" />
+
