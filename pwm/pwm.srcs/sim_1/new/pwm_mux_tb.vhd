@@ -44,10 +44,3 @@ begin
 
 
 end tb;
-
--- Configuration block below is required by some simulators. Usually no need to edit.
-
-configuration cfg_tb_pwm_mux of tb_pwm_mux is
-    for tb
-    end for;
-end cfg_tb_pwm_mux;
