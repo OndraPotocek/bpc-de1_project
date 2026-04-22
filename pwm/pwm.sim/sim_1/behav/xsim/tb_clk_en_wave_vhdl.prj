@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../pwm.srcs/sources_1/imports/working_vhdl_files/clk_en_wave.vhd" \
+"../../../../pwm.srcs/sim_1/new/clk_en_wave_tb.vhd" \
+
+# Do not sort compile order
+nosort
