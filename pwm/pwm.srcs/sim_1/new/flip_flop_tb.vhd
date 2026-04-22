@@ -23,7 +23,7 @@ architecture tb of tb_flip_flop is
     signal catch_btnright : std_logic;
     signal hold_mux       : std_logic_vector (1 downto 0);
 
-    constant TbPeriod : time := 1000 ns; -- ***EDIT*** Put right period here
+    constant TbPeriod : time := 10 ns; -- ***EDIT*** Put right period here
     signal TbClock : std_logic := '0';
     signal TbSimEnded : std_logic := '0';
 
@@ -42,34 +42,57 @@ begin
 
     -- ***EDIT*** Check that clk is really your main clock signal
     clk <= TbClock;
-
-    stimuli : process
+stimuli : process
     begin
-        -- ***EDIT*** Adapt initialization as needed
+        -- 1. Initialization
         catch_btnup <= '0';
         catch_btnleft <= '0';
         catch_btnright <= '0';
 
-        -- Reset generation
-        -- ***EDIT*** Check that rst is really your reset signal
+        -- 2. Reset generation (Clears the system to "00")
         rst <= '1';
         wait for 100 ns;
         rst <= '0';
         wait for 100 ns;
 
-        -- ***EDIT*** Add stimuli here
-        wait for 100 * TbPeriod;
+        -- 3. THE STIMULI (Simulating button presses)
+        
+        -- Test A: Press Left Button (Expect state to become "01")
+        catch_btnleft <= '1';
+        wait for 3 * TbPeriod;  -- Hold button down for 3 clock cycles
+        catch_btnleft <= '0';   -- Release button
+        wait for 10 * TbPeriod; -- Wait and observe it holding "01"
+
+        -- Test B: Press Up Button (Expect state to become "10")
+        catch_btnup <= '1';
+        wait for 3 * TbPeriod;
+        catch_btnup <= '0';
+        wait for 10 * TbPeriod; -- Wait and observe it holding "10"
+
+        -- Test C: Press Right Button (Expect state to become "11")
+        catch_btnright <= '1';
+        wait for 3 * TbPeriod;
+        catch_btnright <= '0';
+        wait for 10 * TbPeriod; -- Wait and observe it holding "11"
+
+        -- Test D: Priority Test (What happens if user mashes two buttons?)
+        -- Since catch_btnleft is higher up in your if/elsif chain, it should win.
+        catch_btnleft <= '1';
+        catch_btnright <= '1';
+        wait for 3 * TbPeriod;
+        catch_btnleft <= '0';
+        catch_btnright <= '0';
+        wait for 10 * TbPeriod;
+
+        -- Test E: Hardware Reset while a wave is playing
+        rst <= '1';
+        wait for 3 * TbPeriod;
+        rst <= '0';
+
+        wait for 20 * TbPeriod;
 
         -- Stop the clock and hence terminate the simulation
         TbSimEnded <= '1';
         wait;
     end process;
-
 end tb;
-
--- Configuration block below is required by some simulators. Usually no need to edit.
-
-configuration cfg_tb_flip_flop of tb_flip_flop is
-    for tb
-    end for;
-end cfg_tb_flip_flop;

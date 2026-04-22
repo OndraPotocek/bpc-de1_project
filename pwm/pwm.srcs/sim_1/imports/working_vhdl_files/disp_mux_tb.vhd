@@ -50,9 +50,3 @@ begin
     end process;
 
 end tb;
-
-
-configuration cfg_tb_disp_mux of tb_disp_mux is
-    for tb
-    end for;
-end cfg_tb_disp_mux;
