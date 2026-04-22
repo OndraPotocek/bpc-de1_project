@@ -34,6 +34,22 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 s_max = clock frequency / (256 * wanted frequency)
       = 100_000_000 / (256 * 200) ... 400 ...
 
-
+## Schematic
 <img width="1660" height="929" alt="schematic" src="https://github.com/user-attachments/assets/260d7e00-7461-4fa2-b487-0d13d8e1e6ff" />
 
+## I/O
+| Signal | Direction | Description |
+|---|---|---|
+| `clk` | input | Main system clock (100 MHz) |
+| `rst_btnc` | input | System-wide reset (center button) |
+| `sw(3:0)` | input | Switches for period / frequency selection |
+| `sw(6:5)` | input | Switches for square wave duty cycle selection |
+| `btnu` | input | Button to select Sawtooth wave |
+| `btnl` | input | Button to select Sine wave |
+| `btnr` | input | Button to select Square wave |
+| `AUD_PWM` | output | Audio PWM output signal for the headphone jack |
+| `oscilloscope` | output | Test PWM signal for oscilloscope connection |
+| `AUD_SD` | output | Audio amplifier enable (hardwired to '1') |
+| `an(7:0)` | output | 7-segment display anodes (digit selection) |
+| `seg(6:0)` | output | 7-segment display segments (number rendering) |
+| `dp` | output | Decimal point (hardwired off to '1') |
