@@ -34,8 +34,9 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 s_max = clock frequency / (256 * wanted frequency)
       = 100_000_000 / (256 * 200) ... 400 ...
 
-## Schematic
-<img width="1660" height="929" alt="schematic" src="https://github.com/user-attachments/assets/260d7e00-7461-4fa2-b487-0d13d8e1e6ff" />
+
+<img width="1660" height="929" alt="schema_21_4 drawio" src="https://github.com/user-attachments/assets/0fd88a71-e16e-4063-82ca-ccfcba33844e" />
+
 
 ## I/O
 | Signal | Direction | Description |
