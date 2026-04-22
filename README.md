@@ -49,7 +49,6 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 ## Simulations
 
 
-
 ## sources:
 [PWM modulation nexys manual](https://digilent.com/reference/_media/reference/programmable-logic/nexys-a7/nexys-a7_rm.pdf)
 

@@ -19,7 +19,7 @@ architecture tb of tb_clk_en_wave is
     signal sel_period : std_logic_vector (3 downto 0);
     signal ce         : std_logic;
 
-    constant TbPeriod : time := 1000 ns; -- faster if we keep it as 1000 ns
+    constant TbPeriod : time := 10 ns; -- faster if we keep it as 1000 ns
     signal TbClock : std_logic := '0';
     signal TbSimEnded : std_logic := '0';
 
