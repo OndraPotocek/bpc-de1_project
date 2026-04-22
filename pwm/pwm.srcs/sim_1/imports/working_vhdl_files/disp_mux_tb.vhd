@@ -34,9 +34,15 @@ begin
     stimuli : process
     begin
         -- ***EDIT*** Adapt initialization as needed
+        sw0 <= "0000";
+        sw1 <= "00";
+        wait for 10 ns;
         sig_dig <= '0';
-        sw0 <= (others => '0');
-        sw1 <= (others => '0');
+        --sw0 <= (others => '0');
+        --sw1 <= (others => '0');
+        wait for 50 ns;
+        sig_dig <= '1';
+        wait for 300 ns;
 
         -- ***EDIT*** Add stimuli here
 
