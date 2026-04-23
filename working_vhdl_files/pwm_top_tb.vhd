@@ -63,27 +63,32 @@ begin
     clk <= TbClock;
 
     stimuli : process
-    begin
-        -- ***EDIT*** Adapt initialization as needed
-        sw <= (others => '0');
-        btnu <= '0';
-        btnl <= '0';
-        btnr <= '0';
+begin
+    -- 1. Initialize Inputs
+    sw <= (others => '0');
+    btnu <= '0'; btnl <= '0'; btnr <= '0';
 
-        -- Reset generation
-        -- ***EDIT*** Check that rst_btnc is really your reset signal
-        rst_btnc <= '1';
-        wait for 100 ns;
-        rst_btnc <= '0';
-        wait for 100 ns;
+    rst_btnc <= '1';
+    wait for 100 ns;
+    rst_btnc <= '0';
+    wait for 200 ns;
 
-        -- ***EDIT*** Add stimuli here
-        wait for 100 * TbPeriod;
+    btnu <= '1';
+    wait for 20 ns; 
+    btnu <= '0';
+    wait for 1 ms; 
+    btnl <= '1';
+    wait for 20 ns;
+    btnl <= '0';
+    wait for 1 ms;
 
-        -- Stop the clock and hence terminate the simulation
-        TbSimEnded <= '1';
-        wait;
-    end process;
+    -- Set sw(1 downto 0) for display mux
+    sw <= "1101011"; 
+    wait for 2 ms; 
+
+    TbSimEnded <= '1';
+    wait;
+end process;
 
 end tb;
 
