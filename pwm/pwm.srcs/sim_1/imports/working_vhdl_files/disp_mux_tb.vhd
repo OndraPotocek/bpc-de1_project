@@ -41,7 +41,24 @@ begin
         --sw0 <= (others => '0');
         --sw1 <= (others => '0');
         wait for 50 ns;
+        sw0 <= "0101";
+        sw1 <= "10";
+        wait for 10 ns;
         sig_dig <= '1';
+        wait for 50 ns;
+        sw1 <= "01";
+        wait for 10 ns;
+        sw0 <= "0000";
+        wait for 20 ns;
+        sig_dig <= '0';
+        wait for 10 ns;
+        sw0 <= "1000";
+        sw1 <= "11";
+        wait for 10 ns;
+        sig_dig <= '0';
+                
+        
+        
         wait for 300 ns;
 
         -- ***EDIT*** Add stimuli here
