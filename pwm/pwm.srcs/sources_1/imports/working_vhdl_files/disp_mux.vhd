@@ -27,7 +27,7 @@ begin
             when '0' =>
                 bin <= sw0;
             when '1' =>
-                bin <= sw1 & "0000";
+                bin <= "00" & sw1; -- Padded with two zeros to make exactly 4 bits!
             when others =>
                 bin <= "0000";
         end case;

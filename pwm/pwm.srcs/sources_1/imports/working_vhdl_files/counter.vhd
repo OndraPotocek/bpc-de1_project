@@ -1,54 +1,48 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;  -- Package for data types conversion
-
--------------------------------------------------
-
+-- 8-bit phase accumulator counter
+-- Increments on each enable pulse from clk_en_wave
 entity counter is
-    generic (
-        G_BITS : positive := 3  --! Default number of bits
-    );
-    port (
-        clk : in  std_logic;                             --! Main clock
-        rst : in  std_logic;                             --! High-active synchronous reset
-        en  : in  std_logic;                             --! Clock enable input
-        cnt : out std_logic_vector(G_BITS - 1 downto 0)  --! Counter value
-    );
-end entity counter;
+    Port ( clk      : in STD_LOGIC;                     -- 100MHz system clock
+           rst      : in STD_LOGIC;                     -- Active HIGH reset (1 = reset)
+           en       : in STD_LOGIC;                     -- Clock enable from clk_en_wave
+           cnt_out  : out STD_LOGIC_VECTOR (7 downto 0) -- 8-bit counter output (0-255)
+         );
+end counter;
 
--------------------------------------------------
+architecture Behavioral of counter is
 
-architecture behavioral of counter is
-
-    -- Maximum counter value = 2^G_BITS - 1
-    constant C_MAX : integer := 2**G_BITS - 1;
-
-    -- Integer counter with defined range
-    signal sig_cnt : integer range 0 to C_MAX;
+    -- Internal 8-bit counter signal
+    signal s_cnt : integer range 0 to 255 := 0;
 
 begin
 
-    --! Clocked process with synchronous reset which implements
-    --! N-bit up counter.
-
-    p_counter : process (clk) is
+    -- Main counter process
+    process (clk) is
     begin
+    
+        -- Trigger on rising edge of clock
         if rising_edge(clk) then
-            if rst = '1' then    -- Synchronous, active-high reset
-                sig_cnt <= 0;
-
-            elsif en = '1' then  -- Clock enable activated
-                if sig_cnt = C_MAX then
-                    sig_cnt <= 0;
-                else
-                    sig_cnt <= sig_cnt + 1;
-                end if;          -- Each `if` must end by `end if`
+        
+            -- Check reset
+            if rst = '1' then
+                -- Clear counter to zero
+                s_cnt <= 0;
+                
+            -- Only increment when enable pulse arrives
+            elsif en = '1' then
+                -- Add 1 to counter (wraps 255->0 automatically)
+                s_cnt <= s_cnt + 1;
+                
             end if;
+            
         end if;
-    end process p_counter;
+        
+    end process;
 
-    -- Convert integer to std_logic_vector
-    cnt <= std_logic_vector(to_unsigned(sig_cnt, G_BITS));
+    -- Convert to std_logic_vector for output
+    cnt_out <= std_logic_vector(to_unsigned(s_cnt, 8));
 
-end architecture behavioral;
+end Behavioral;

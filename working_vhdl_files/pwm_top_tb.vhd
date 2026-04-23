@@ -1,8 +1,3 @@
--- Testbench automatically generated online
--- at https://vhdl.lapinoo.net
--- Generation date : Thu, 23 Apr 2026 06:55:12 GMT
--- Request id : cfwk-fed377c2-69e9c25056387
-
 library ieee;
 use ieee.std_logic_1164.all;
 
@@ -37,7 +32,8 @@ architecture tb of tb_pwm_top is
     signal seg      : std_logic_vector (6 downto 0);
     signal dp       : std_logic;
 
-    constant TbPeriod : time := 1000 ns; -- ***EDIT*** Put right period here
+    -- FIXED: 10 ns period for a true 100 MHz clock!
+    constant TbPeriod : time := 10 ns; 
     signal TbClock : std_logic := '0';
     signal TbSimEnded : std_logic := '0';
 
@@ -58,43 +54,63 @@ begin
 
     -- Clock generation
     TbClock <= not TbClock after TbPeriod/2 when TbSimEnded /= '1' else '0';
-
-    -- ***EDIT*** Check that clk is really your main clock signal
     clk <= TbClock;
 
     stimuli : process
-begin
-    -- 1. Initialize Inputs
-    sw <= (others => '0');
-    btnu <= '0'; btnl <= '0'; btnr <= '0';
+    begin
+        -- 1. Initialize Inputs
+        sw <= (others => '0');
+        btnu <= '0'; 
+        btnl <= '0'; 
+        btnr <= '0';
 
-    rst_btnc <= '1';
-    wait for 100 ns;
-    rst_btnc <= '0';
-    wait for 200 ns;
+        -- 2. Master Reset
+        rst_btnc <= '1';
+        wait for 100 ns;
+        rst_btnc <= '0';
+        wait for 500 ns;
 
-    btnu <= '1';
-    wait for 20 ns; 
-    btnu <= '0';
-    wait for 1 ms; 
-    btnl <= '1';
-    wait for 20 ns;
-    btnl <= '0';
-    wait for 1 ms;
+        -- ======================================================
+        -- TEST A: Sawtooth Wave (UP Button)
+        -- ======================================================
+        -- We MUST hold the button for 3 ms to beat the 2 ms debouncer!
+        btnu <= '1';
+        wait for 3 ms; 
+        btnu <= '0';
+        
+        -- Let the sawtooth wave play for a while at the lowest pitch
+        wait for 5 ms; 
 
-    -- Set sw(1 downto 0) for display mux
-    sw <= "1101011"; 
-    wait for 2 ms; 
 
-    TbSimEnded <= '1';
-    wait;
-end process;
+        -- ======================================================
+        -- TEST B: Sine Wave (LEFT Button) + Higher Pitch
+        -- ======================================================
+        sw(3 downto 0) <= "0110"; -- Change pitch to 1 kHz
+        
+        btnl <= '1';
+        wait for 3 ms; -- Hold to pass debouncer
+        btnl <= '0';
+        
+        -- Let the sine wave play for a while at the new pitch
+        wait for 5 ms;
+
+
+        -- ======================================================
+        -- TEST C: Square Wave (RIGHT Button) + 75% Duty Cycle
+        -- ======================================================
+        sw(6 downto 5) <= "10";   -- Set duty cycle to 75%
+        sw(3 downto 0) <= "1111"; -- Set pitch to 8 kHz
+        
+        btnr <= '1';
+        wait for 3 ms; -- Hold to pass debouncer
+        btnr <= '0';
+        
+        -- Let the square wave play for a while
+        wait for 5 ms;
+
+        -- End the simulation
+        TbSimEnded <= '1';
+        wait;
+    end process;
 
 end tb;
-
--- Configuration block below is required by some simulators. Usually no need to edit.
-
-configuration cfg_tb_pwm_top of tb_pwm_top is
-    for tb
-    end for;
-end cfg_tb_pwm_top;
