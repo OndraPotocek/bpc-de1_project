@@ -8,3 +8,7 @@
 *.snm
 *.out
 *.nav
+*.xpr
+*.cache
+*.runs
+.Xil/
