@@ -9,7 +9,7 @@ entity pwm_mux is
         pwm_mux_saw   : in  STD_LOGIC_VECTOR (7 downto 0); -- Sawtooth from counter
         pwm_mux_sq    : in  STD_LOGIC_VECTOR (7 downto 0); -- Square from sq_gen
         pwm_mux_sine  : in  STD_LOGIC_VECTOR (7 downto 0); -- Sine from sine_gen
-        wav_sel       : in  STD_LOGIC_VECTOR (1 downto 0); -- 00=saw, 01=sq, 10=sine
+        wav_sel       : in  STD_LOGIC_VECTOR (1 downto 0);
         pwm_mux_out   : out STD_LOGIC_VECTOR (7 downto 0)
     );
 end pwm_mux;
@@ -23,13 +23,15 @@ begin
     begin
         case wav_sel is
             when "00" => 
-                pwm_mux_out <= pwm_mux_saw;   -- Sawtooth
-            when "01" => 
-                pwm_mux_out <= pwm_mux_sq;    -- Square
+                pwm_mux_out <= pwm_mux_sq;   -- Výchozí stav (Obdélník)
             when "10" => 
-                pwm_mux_out <= pwm_mux_sine;  -- Sine
+                pwm_mux_out <= pwm_mux_saw;   -- btnu (Horní) -> Pila
+            when "11" => 
+                pwm_mux_out <= pwm_mux_sq;    -- btnr (Pravé) -> Obdélník
+            when "01" => 
+                pwm_mux_out <= pwm_mux_sine;  -- btnl (Levé) -> Sinus
             when others => 
-                pwm_mux_out <= pwm_mux_sq;   -- Default/Safety
+                pwm_mux_out <= pwm_mux_saw;
         end case;
     end process;
 
