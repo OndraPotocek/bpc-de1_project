@@ -1,0 +1,46 @@
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity tb_pwm_mux is
+end tb_pwm_mux;
+
+architecture tb of tb_pwm_mux is
+
+    component pwm_mux
+        port (pwm_mux_saw  : in std_logic_vector (7 downto 0);
+              pwm_mux_sq   : in std_logic_vector (7 downto 0);
+              pwm_mux_sine : in std_logic_vector (7 downto 0);
+              wav_sel      : in std_logic_vector (1 downto 0);
+              pwm_mux_out  : out std_logic_vector (7 downto 0));
+    end component;
+
+    signal pwm_mux_saw  : std_logic_vector (7 downto 0);
+    signal pwm_mux_sq   : std_logic_vector (7 downto 0);
+    signal pwm_mux_sine : std_logic_vector (7 downto 0);
+    signal wav_sel      : std_logic_vector (1 downto 0);
+    signal pwm_mux_out  : std_logic_vector (7 downto 0);
+
+begin
+
+    dut : pwm_mux
+    port map (pwm_mux_saw  => pwm_mux_saw,
+              pwm_mux_sq   => pwm_mux_sq,
+              pwm_mux_sine => pwm_mux_sine,
+              wav_sel      => wav_sel,
+              pwm_mux_out  => pwm_mux_out);
+
+    stimuli : process
+    begin
+        -- ***EDIT*** Adapt initialization as needed
+        pwm_mux_saw <= (others => '0');
+        pwm_mux_sq <= (others => '0');
+        pwm_mux_sine <= (others => '0');
+        wav_sel <= (others => '0');
+
+
+        wait;
+    end process;        -- ***EDIT*** Add stimuli here
+
+
+end tb;
