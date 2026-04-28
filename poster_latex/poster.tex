@@ -1,12 +1,13 @@
 % !TeX program = xelatex
 \documentclass[final]{beamer}
-\usepackage[T1]{fontenc}
- \usepackage[utf8]{luainputenc}
+
+% Pro XeLaTeX je lepsi pouzivat fontspec misto fontenc a inputenc
+\usepackage{fontspec}
 \usepackage{lmodern}
-\usepackage[size=custom, width=297,height=210, scale=1.2]{beamerposter}
-%\usepackage[T1]{fontenc}
-%\usepackage{lmodern}
+
+% Nechavame jen jedno nastaveni rozmeru posteru (to puvodni A0)
 \usepackage[orientation=portrait,size=a0,scale=1.0]{beamerposter}
+
 \usetheme{gemini}
 \usecolortheme{nott}
 \usepackage{graphicx}
@@ -20,8 +21,6 @@
 % Lengths
 % ====================
 
-% If you have N columns, choose \sepwidth and \colwidth such that
-% (N+1)*\sepwidth + N*\colwidth = \paperwidth
 \newlength{\sepwidth}
 \newlength{\colwidth}
 \setlength{\sepwidth}{0.025\paperwidth}
@@ -33,7 +32,7 @@
 % Title
 % ====================
 
-\title{Waveform Generator}
+\title{GG Generator}
 
 \author{Jan Pánik \inst{1} \and Ondřej Potoček \inst{2} \and Anna Hrušková \inst{2}}
 
@@ -44,18 +43,15 @@
 % ====================
 
 \footercontent{
-  \href{https://www.example.com}{} \hfill
+  \href{https://www.example.com}{example.com} \hfill
   ABC \hfill
-  \href{mailto:agajan.torayev@example.com}{}}
+  \href{mailto:agajan.torayev@example.com}{agajan.torayev@example.com}}
 % (can be left out to remove footer)
-
 
 % ====================
 % Logo (optional)
 % ====================
 
-% use this to include logos on the left and/or right side of the header:
-%\logoright{\includegraphics[height=2cm]{logo_VUT.png}}
 \logoleft{\includegraphics[height=3cm]{logo_VUT.png}}
 
 % ====================
@@ -63,16 +59,6 @@
 % ====================
 
 \begin{document}
-
-% Refer to https://github.com/k4rtik/uchicago-poster
-% logo: https://www.cam.ac.uk/brand-resources/about-the-logo/logo-downloads
-% \addtobeamertemplate{headline}{}
-% {
-%     \begin{tikzpicture}[remember picture,overlay]
-%       \node [anchor=north west, inner sep=3cm] at ([xshift=-2.5cm,yshift=1.75cm]current page.north west)
-%       {\includegraphics[height=7cm]{logos/unott-logo.eps}}; 
-%     \end{tikzpicture}
-% }
 
 \begin{frame}[t]
 \begin{columns}[t]
@@ -84,8 +70,8 @@
     
     XDC (Xilinx Design Constraints) file was edited specifically for the Nexys A7-50T.
     \begin{itemize}
-      \item \textbf{Inputs} System clock (clk), Buttons (debounced) for Reset and Waveform Selection. Switches mapped for Period and Duty Cycles to be set.
-      \item \textbf{Outputs} Visuals, such as standard LEDs and 7-segment displays. PWM signals' primary output routed to pin A11 (LPF) for audio output, as well as Pmod JA for oscilloscope monitoring. No need to map the GND pin.
+      \item \textbf{Inputs:} System clock (clk), Buttons (debounced) for Reset and Waveform Selection. Switches mapped for Period and Duty Cycles to be set.
+      \item \textbf{Outputs:} Visuals, such as standard LEDs and 7-segment displays. PWM signals' primary output routed to pin A11 (LPF) for audio output, as well as Pmod JA for oscilloscope monitoring. No need to map the GND pin.
     \end{itemize}
     There was no need to use UART and RGB LEDs, those were disabled. 
 
@@ -94,26 +80,24 @@
   \begin{alertblock}{Schematic}
     pwm\_top
     \begin{itemize}
-    \item \textbf{Inputs} - clk, reset (located on the btnc button), switches (from 0 to 3) to change the period, and then 5 and 6 to change the duty cycle of a square wave. All used buttons are debounced.
+    \item \textbf{Inputs} -- clk, reset (located on the btnc button), switches (from 0 to 3) to change the period, and then 5 and 6 to change the duty cycle of a square wave. All used buttons are debounced.
     
-    Case needed for switch mapping the duty cycles. If the counter's current vaule is less than the treshold we set, it outputs a '1', else '0'.
+    Case needed for switch mapping the duty cycles. If the counter's current value is less than the threshold we set, it outputs a '1', else '0'.
 
     \item \textbf{Outputs} 
     \end{itemize}
     
-    latch - acts as a memory
+    latch -- acts as a memory
     \begin{itemize}
     \item \textbf{Inputs}
     \item \textbf{Outputs} 
     \end{itemize}
     
+      saw tooth wave -- since counter already counts from 0 to 255 and then drops back to 0 again, it is literally a sawtooth wave.
 
-      saw tooth wave = since counter already counts from 0 to 255 and then drops back to 0 again, it is literally a sawtooth wave.
-
-
-      sq\_gen takes in 2 switches directly - CASE statement needed to translate switches into binary - MUX expects 8-bit binary, we have only 2 
+      sq\_gen takes in 2 switches directly -- CASE statement needed to translate switches into binary -- MUX expects 8-bit binary, we have only 2.
     
-      display multiplex has \"00\" & sw so it has 4 bits on the input - glues them together
+      display multiplex has ``00'' \& sw so it has 4 bits on the input -- glues them together.
 
   \end{alertblock}
 
@@ -139,13 +123,10 @@
   \begin{block}{Nam cursus consequat egestas}
 
   \end{block}
-
   
   \begin{exampleblock}{A highlighted block containing some math}
 
   \end{exampleblock}
-
- 
 
   \begin{block}{References}
 
@@ -156,8 +137,6 @@
 
 \end{column}
 \separatorcolumn
-
-
 
 \end{columns}
 \end{frame}
