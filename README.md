@@ -47,7 +47,61 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 | `an_sel` | Anode Decoder | Synchronizes with `disp_mux` to turn on the correct physical digit (anode) on the board at the right time. |
 
 ## Simulations
+### Flip-flop
+- File:`flip_flop_tb`
+### Counters
+- File: `counter_tb`
+- File: `counter_1bit_tb`
+<table>
+  <tr>
+    <td> Time </td>
+    <td> 0 ns </td>
+    <td> 100 ns </td>
+    <td> 200 ns </td>
+    <td> 300 ns </td>
+    <td> 400 ns </td>
+    <td> 900 ns </td>
+    <td> 1200 ns </td>
+  </tr>
+  <tr>
+    <td> Tests </td>
+    <td><code> en = 0 <br> rst = 0 <code></td>
+    <td><code> rst = 0 <code></td>
+    <td><code> en = 1 <code></td>
+    <td><code> en = 0 <code></td>
+    <td><code> en = 1 <code></td>
+    <td><code> en = 0 <code></td>
+    <td><code> en = 1 <code></td>
+  </tr>
+</table>
 
+### Generators
+- File: `sq_gen_tb`
+- File: `sine_gen_tb`
+### Multiplexors
+- File: `pwm_mux`
+- File: `disp_mux`
+### Pwm
+- File: `pwm_tb`
+### An sel
+- File: `an_sel_tb`
+
+<table>
+  <tr>
+    <td> Time </td>
+    <td> 0 ns </td>
+    <td> 100 ns </td>
+    <td> 200 ns </td>
+    <td> 300 ns </td>
+  </tr>
+  <tr>
+    <td> Tests </td>
+    <td><code> sig_digit = 0 <code></td>
+    <td><code> sig_digit = 1 <code></td>
+    <td><code> sig_digit = 0 <code></td>
+    <td><code> sig_digit = 1 <code></td>
+  </tr>
+</table>
 
 ## sources:
 [PWM modulation nexys manual](https://digilent.com/reference/_media/reference/programmable-logic/nexys-a7/nexys-a7_rm.pdf)
