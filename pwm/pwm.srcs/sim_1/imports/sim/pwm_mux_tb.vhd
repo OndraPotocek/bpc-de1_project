@@ -1,6 +1,8 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
 
 entity tb_pwm_mux is
 end tb_pwm_mux;
@@ -32,15 +34,30 @@ begin
 
     stimuli : process
     begin
-        -- ***EDIT*** Adapt initialization as needed
-        pwm_mux_saw <= (others => '0');
-        pwm_mux_sq <= (others => '0');
-        pwm_mux_sine <= (others => '0');
-        wav_sel <= (others => '0');
+        --  ciselne hodnoty prevedene na vektory.
+        pwm_mux_saw  <= std_logic_vector(to_unsigned(50, 8));  -- Pila = 50 (Hex: 32)
+        pwm_mux_sq   <= std_logic_vector(to_unsigned(100, 8)); -- Obdelnik = 100 (Hex: 64)
+        pwm_mux_sine <= std_logic_vector(to_unsigned(150, 8)); -- Sinus = 150 (Hex: 96)
+        
+        wait for 20 ns;
 
+        -- Test A: Pila (Sawtooth)
+        wav_sel <= "00";
+        wait for 50 ns; -- Na vystupu pwm_mux_out by melo byt 50
+
+        -- Test B: Obdelnik (Square)
+        wav_sel <= "01";
+        wait for 50 ns; -- Na vystupu by melo byt 100
+
+        -- Test C: Sinus (Sine)
+        wav_sel <= "10";
+        wait for 50 ns; -- Na vystupu by melo byt 150
+
+        -- Test D: Pojistka pro ostatni stavy
+        wav_sel <= "11";
+        wait for 50 ns; -- Na vystupu by melo byt opet 100
 
         wait;
-    end process;        -- ***EDIT*** Add stimuli here
-
+    end process;
 
 end tb;

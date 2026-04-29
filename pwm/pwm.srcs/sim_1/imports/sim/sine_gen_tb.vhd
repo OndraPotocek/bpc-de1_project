@@ -362,10 +362,3 @@ begin
     end process;
 
 end tb;
-
--- Configuration block below is required by some simulators. Usually no need to edit.
-
-configuration cfg_tb_sine_gen of tb_sine_gen is
-    for tb
-    end for;
-end cfg_tb_sine_gen;
