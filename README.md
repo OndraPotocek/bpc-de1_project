@@ -103,6 +103,8 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
   </tr>
 </table>
 
+<img width="2146" height="447" alt="pwm_top_sim" src="https://github.com/user-attachments/assets/9a1cfead-afca-4e7d-99cc-b71f1bb57b19" />
+
 ## sources:
 [PWM modulation nexys manual](https://digilent.com/reference/_media/reference/programmable-logic/nexys-a7/nexys-a7_rm.pdf)
 
