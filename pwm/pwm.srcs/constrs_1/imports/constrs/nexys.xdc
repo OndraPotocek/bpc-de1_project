@@ -78,7 +78,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports {an[*]}]
 # -----------------------------------------------
 # Pmod Header JA ==> for connecting oscilloscope
 # -----------------------------------------------
-set_property -dict { PACKAGE_PIN C17 IOSTANDARD LVCMOS33 } [get_ports {oscilloscope}];
+set_property -dict { PACKAGE_PIN D18 IOSTANDARD LVCMOS33 } [get_ports {oscilloscope}];
 
 # -----------------------------------------------
 # (Remaining peripherals preserved but omitted here for brevity)
