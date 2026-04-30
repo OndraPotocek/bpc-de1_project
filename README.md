@@ -49,22 +49,56 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 ## Simulations
 ### Flip-flop
 - File:`flip_flop_tb`
+<table>
+  <tr>
+    <td> Time [ ns ] </td>
+    <td> 0 </td>
+    <td> 100 </td>
+    <td> 200 </td>
+    <td> 230 </td>
+    <td> 330 </td>
+    <td> 360 </td>
+    <td> 460 </td>
+    <td> 490 </td>
+    <td> 590 </td>
+    <td> 620 </td>
+    <td> 720 </td>
+    <td> 750 </td>
+    <td> 950 </td>
+  </tr>
+  <tr>
+  <td> Tests </td>
+    <td><code>catch_btnup = 0</code><br><code>catch_btnleft = 0</code><br><code>catch_btnright = 0</code><br><code>rst = 1</code></td>
+    <td><code>rst = 0</code></td>
+    <td><code>catch_btnleft = 1</code></td>
+    <td><code>catch_btnleft = 0</code></td>
+    <td><code>catch_btnup = 1</code></td>
+    <td><code>catch_btnup = 0</code></td>
+    <td><code>catch_btnright = 1</code></td>
+    <td><code>catch_btnright = 0</code></td>
+    <td><code>catch_btnleft = 1</code><br><code>catch_btnright = 1</code></td>
+    <td><code>catch_btnleft = 0</code><br><code>catch_btnright = 0</code></td>
+    <td><code>rst = 1</code></td>
+    <td>rst = 0</td>
+  </tr>
+</table>
+
 ### Counters
 - File: `counter_tb`
 <table>
   <tr>
-    <td> Time </td>
-    <td> 0 ns </td>
-    <td> 20 ns </td>
-    <td> 30 ns </td>
-    <td> 80 ns </td>
-    <td> 110 ns </td>
-    <td> 260 ns </td>
-    <td> 280 ns </td>
+    <td> Time [ ns ] </td>
+    <td> 0 </td>
+    <td> 20 </td>
+    <td> 30 </td>
+    <td> 80 </td>
+    <td> 110 </td>
+    <td> 260 </td>
+    <td> 280 </td>
   </tr>
   <tr>
     <td> Tests </td>
-    <td><code> en = 0</code><br><code>rst = 1</code></td>
+    <td><code> en = 0 </code><br><code> rst = 1 </code></td>
     <td><code> rst = 0 <code></td>
     <td><code> en = 1 <code></td>
     <td><code> en = 0 <code></td>
@@ -77,18 +111,18 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 - File: `counter_1bit_tb`
 <table>
   <tr>
-    <td> Time </td>
-    <td> 0 ns </td>
-    <td> 100 ns </td>
-    <td> 200 ns </td>
-    <td> 300 ns </td>
-    <td> 400 ns </td>
-    <td> 900 ns </td>
-    <td> 1200 ns </td>
+    <td> Time [ ns ] </td>
+    <td> 0 </td>
+    <td> 100 </td>
+    <td> 200 </td>
+    <td> 300 </td>
+    <td> 400 </td>
+    <td> 900 </td>
+    <td> 1200 </td>
   </tr>
   <tr>
     <td> Tests </td>
-    <td><code> en = 0</code><br><code>rst = 1</code></td>
+    <td><code> en = 0 </code><br><code> rst = 1 </code></td>
     <td><code> rst = 0 <code></td>
     <td><code> en = 1 <code></td>
     <td><code> en = 0 <code></td>
@@ -100,12 +134,65 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 
 ### Generators
 - File: `sq_gen_tb`
+<table>
+  <tr>
+    <td> Time [ ns ] </td>
+    <td> 0 - 2540 </td>
+    <td> 2550 - 5100 </td>
+    <td> 5110 - 7650 </td>
+    <td> 7660 - 10200 </td>
+  </tr>
+  <tr>
+    <td> Tests </td>
+    <td><code>duty_cyc = "00"</code><br><code>cnt_in_sq = "00000000" - "11111111"</td>
+    <td><code>duty_cyc = "01"</code><br><code>cnt_in_sq = "00000000" - "11111111"</td>
+    <td><code>duty_cyc = "10"</code><br><code>cnt_in_sq = "00000000" - "11111111"</td>
+    <td><code>duty_cyc = "11"</code><br><code>cnt_in_sq = "00000000" - "11111111"</td>
+  </tr>
+</table>
 
 - File: `sine_gen_tb`
+<table>
+  <tr>
+    <td> Time [ ns ] </td>
+    <td> 0 - 2550 </td>
+  </tr>
+  <tr>
+    <td> Tests </td>
+    <td><code>cnt_in_sine = "00000000" - "11111111"</code></td>
+  </tr>
+</table>
 
 ### Multiplexors
 - File: `pwm_mux`
 - File: `disp_mux`
+<table>
+  <tr>
+    <td> Time [ ns ] </td>
+    <td> 0 </td>
+    <td> 10 </td>
+    <td> 60 </td>
+    <td> 70 </td>
+    <td> 120 </td>
+    <td> 130 </td>
+    <td> 150 </td>
+    <td> 160 </td>
+    <td> 170 </td>
+  </tr>
+  <tr>
+    <td> Tests </td>
+    <td><code>sw0 = "0000"</code><br><code>sw1 = "00"</code></td>
+    <td><code>sig_dig = 0</code></td>
+    <td><code>sw0 = "0101"</code><br><code>sw1 = "10"</code></td>
+    <td><code>sig_dig = 1</code></td>
+    <td><code>sw1 = "01"</code></td>
+    <td><code>sw0 = "0000"</code></td>
+    <td><code>sig_dig = 0</code></td>
+    <td><code>sw0 = "1000"</code><br><code>sw1 = "11"</code></td>
+    <td><code>sig_dig = 0</code></td>
+  </tr>
+</table>
+
 ### Pwm
 - File: `pwm_tb`
 ### An sel
@@ -113,11 +200,11 @@ Waveform Generator is project for BPC_DE1 subject at Brno University of Technolo
 
 <table>
   <tr>
-    <td> Time </td>
-    <td> 0 ns </td>
-    <td> 100 ns </td>
-    <td> 200 ns </td>
-    <td> 300 ns </td>
+    <td> Time [ ns ] </td>
+    <td> 0 </td>
+    <td> 100 </td>
+    <td> 200 </td>
+    <td> 300 </td>
   </tr>
   <tr>
     <td> Tests </td>
